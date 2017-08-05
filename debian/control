@@ -1,0 +1,25 @@
+Source: pulseaudio-modules-droid
+Section: unknown
+Priority: optional
+Maintainer: JBBgameich <jbb.mail@gmx.de>
+Build-Depends: debhelper (>= 9),
+               android-headers,
+               libhardware-dev [armhf i386 amd64],
+               libdbus-1-dev,
+               libpulse-dev
+Standards-Version: 4.0.0
+Homepage: https://github.com/mer-hybris/pulseaudio-modules-droid
+
+Package: pulseaudio-module-droid
+Architecture: armhf i386 amd64
+Priority: extra
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Description: Android Audio HAL module for PulseAudio sound server
+ PulseAudio, previously known as Polypaudio, is a sound server for POSIX and
+ WIN32 systems. It is a drop in replacement for the ESD sound server with
+ much better latency, mixing/re-sampling quality and overall architecture.
+ .
+ This module enables PulseAudio to work on top of the Android Audio HAL.
+ .
+ The module is called module-droid.

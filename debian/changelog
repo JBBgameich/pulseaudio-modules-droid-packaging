@@ -1,0 +1,5 @@
+pulseaudio-modules-droid (8.0.59-1) unstable; urgency=medium
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- JBBgameich <jbb.mail@gmx.de>  Sat, 05 Aug 2017 09:05:51 +0200
