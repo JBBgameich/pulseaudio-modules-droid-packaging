@@ -4,5 +4,29 @@
 # output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
+include /usr/share/dpkg/default.mk
+
+DEB_CONFIGURE_EXTRA_FLAGS = --libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
+  --with-module-dir=\$${prefix}/lib/pulse-$(DEB_VERSION_UPSTREAM)/modules \
+  --with-systemduserunitdir=\$${prefix}/lib/systemd/user \
+
 %:
 	dh $@ --with autoreconf
+
+override_dh_auto_configure:
+	dh_auto_configure -- $(DEB_CONFIGURE_EXTRA_FLAGS)
+
+override_dh_autoreconf:
+	echo $(DEB_VERSION_UPSTREAM) > .tarball-version
+	dh_autoreconf
+
+override_dh_makeshlibs:
+	dh_makeshlibs --exclude=usr/lib/pulse-$(DEB_VERSION_UPSTREAM)/modules \
+		--exclude=usr/lib/$(DEB_HOST_MULTIARCH)/pulseaudio
+
+override_dh_installdocs:
+	dh_installdocs -A README
+
+override_dh_autoreconf_clean:
+	if [ -e .tarball-version ]; then rm .tarball-version; fi
+	override_dh_autoreconf_clean
