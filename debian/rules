@@ -28,5 +28,5 @@ override_dh_installdocs:
 	dh_installdocs -A README
 
 override_dh_autoreconf_clean:
-	if [ -e .tarball-version ]; then rm .tarball-version; fi
+	[ -f .tarball-version ] && rm .tarball-version
 	override_dh_autoreconf_clean
